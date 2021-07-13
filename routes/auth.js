@@ -13,6 +13,11 @@ router.get('/login', (req,res) => {
     res.send(html+"&show_dialog=true");
 });
 
+router.get('/test', (req,res) => {
+
+    res.send("Success!");
+});
+
 router.get('/callback', async (req,res) => {
     let spotifyApi = getSpotify();
     const { code } = req.query;
