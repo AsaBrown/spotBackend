@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = 8080;
+const port = process.env.WEBSITES_PORT || 8080;
 
 require('dotenv').config();
 
@@ -27,6 +27,6 @@ app.get('/', (req, res) => {
 app.use('/querySpotify', spotifyRouter);
 app.use('/auth', authRouter);
 
-app.listen(process.env.WEBSITES_PORT, () => {
+app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
 });
