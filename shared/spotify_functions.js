@@ -43,6 +43,7 @@ const queueSong = (trackId, callback) => {
 }
 
 const querySongs = async (track, artist, callback) => {
+    console.log("QUERY HIT");
     let spotifyApi = getSpotify();
     spotifyApi.searchTracks('track:' + track + ' artist:' + artist)
     .then((data) => {

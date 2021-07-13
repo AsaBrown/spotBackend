@@ -26,7 +26,7 @@ router.get('/callback', async (req,res) => {
         SpotifyToken.deleteMany({}, () => {
             newToken.save();
         });
-        res.redirect('http://localhost:3000/home');
+        res.redirect(`${process.env.FRONTEND_URL}/home`);
     } catch(err) {
         console.log('error in callback');
     }

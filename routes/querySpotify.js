@@ -44,8 +44,9 @@ router.get('/playSong/:trackId', (req, res) => {
 });
 
 router.get('/querySongs/:artist/:track', (req, res) => {
+    console.log("QUERYING SONGS");
     let spotifyApi = getSpotify();
-    console.log('received query' + spotifyApi.getAccessToken());
+    console.log('received query ');
     spotifyApi.searchTracks('track:' + req.params.track + ' artist:' + req.params.artist, {limit: 7})
     .then(function(data) {
         let items = data.body.tracks.items;

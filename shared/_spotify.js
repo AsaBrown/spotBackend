@@ -6,13 +6,13 @@ const initSpotify = () => {
     spotifyApi = new SpotifyWebApi({
         clientId: process.env.SPOT_CLIENT_ID,
         clientSecret: process.env.SPOT_CLIENT_SECRET,
-        redirectUri: 'http://localhost:5000/auth/callback/'
+        redirectUri: `${process.env.FRONTEND_URL}/auth/callback/`
         });
-    console.log('SPOT CONNECTED');
+    console.log('SPOTIFY CONNECTED');
 }
 
 const getSpotify = () => {
-    if(spotifyApi){
+    if(spotifyApi) { 
         return spotifyApi;
     }
 }
