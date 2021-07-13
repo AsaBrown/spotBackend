@@ -27,6 +27,6 @@ app.get('/', (req, res) => {
 app.use('/querySpotify', spotifyRouter);
 app.use('/auth', authRouter);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.WEBSITES_PORT, () => {
     console.log(`App listening at http://localhost:${port}`)
 });
