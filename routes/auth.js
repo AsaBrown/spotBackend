@@ -14,13 +14,13 @@ router.get('/login', (req,res) => {
 });
 
 router.get('/test', (req,res) => {
-
     res.send("Success!");
 });
 
 router.get('/callback', async (req,res) => {
     let spotifyApi = getSpotify();
     const { code } = req.query;
+
     try {
         var data = await spotifyApi.authorizationCodeGrant(code);
         const { access_token, refresh_token } = data.body;
@@ -31,6 +31,7 @@ router.get('/callback', async (req,res) => {
         SpotifyToken.deleteMany({}, () => {
             newToken.save();
         });
+
         res.redirect(`${process.env.FRONTEND_URL}/home`);
     } catch(err) {
         console.log('error in callback');
