@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = process.env.WEBSITES_PORT || 8080;
+const port = process.env.WEBSITES_PORT || process.env.PORT || 8080;
 
 require('dotenv').config();
 
