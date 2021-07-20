@@ -7,7 +7,7 @@ const port = process.env.WEBSITES_PORT || process.env.PORT || 8080;
 require('dotenv').config();
 
 const app = express();
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/spotifyAuth');
 const spotifyRouter = require('./routes/querySpotify');
 const twilioRouter = require('./routes/twilio');
 
@@ -22,7 +22,7 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Hello World!');
     console.log("HIT");
-  });
+});
 
 app.use('/querySpotify', spotifyRouter);
 app.use('/auth', authRouter);

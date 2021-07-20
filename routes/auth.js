@@ -1,41 +1,23 @@
-"use strict";
 const express = require("express");
-const SpotifyToken = require('../models/token');
 const getSpotify = require('../shared/_spotify').getSpotify;
+const { default: axios } = require('axios');
+const jwt  = require('jsonwebtokens');
+const User = require("../models/User.js");
 
 let router = express.Router();
-let scopes = ['user-read-private', 'user-read-email','playlist-modify-public','playlist-modify-private', 'user-modify-playback-state'];
 
-router.get('/login', (req,res) => {
-    let spotifyApi = getSpotify();
-    console.log("Login hit");
-    var html = spotifyApi.createAuthorizeURL(scopes);
-    res.send(html+"&show_dialog=true");
-});
+router.get('/signUp', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
 
-router.get('/test', (req,res) => {
-    res.send("Success!");
-});
-
-router.get('/callback', async (req,res) => {
-    let spotifyApi = getSpotify();
-    const { code } = req.query;
-
-    try {
-        var data = await spotifyApi.authorizationCodeGrant(code);
-        const { access_token, refresh_token } = data.body;
-        spotifyApi.setAccessToken(access_token);
-        spotifyApi.setRefreshToken(refresh_token);
-
-        var newToken = new SpotifyToken({ authToken: access_token, refreshToken: refresh_token, dateCreated: Date.now() });
-        SpotifyToken.deleteMany({}, () => {
-            newToken.save();
+    let userResult = User.find({ username: `${username}`});
+    if (userResult == null) {
+        let user = new User({
+            username: username, 
+            password: password,
         });
-
-        res.redirect(`${process.env.FRONTEND_URL}/home`);
-    } catch(err) {
-        console.log('error in callback');
+    } else {
+        //send responds that username already exists
     }
- });
 
-module.exports = router;
+});
