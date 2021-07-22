@@ -19,7 +19,9 @@ const userSchema = new Schema({
     }
 });
 
-userSchema.pre('save', async (next) => {
+userSchema.pre('save', async function (next) {
+    console.log(`password: ${this.password}`);
+    console.log(this);
     const user = this;
     const hash = await bcrypt.hash(this.password, 10);
 
@@ -34,4 +36,5 @@ userSchema.methods.isValidPassword = async (password) => {
     return compare;
 }
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', userSchema);
+module.exports = UserModel;

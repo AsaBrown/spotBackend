@@ -2,7 +2,7 @@
 const express = require("express");
 const getSpotify = require('../shared/_spotify').getSpotify;
 const { default: axios } = require('axios');
-const Log = require('../models/log')
+const Log = require('../models/log');
 
 let router = express.Router();
 
