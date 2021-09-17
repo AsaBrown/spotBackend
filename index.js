@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = process.env.WEBSITES_PORT || process.env.PORT || 8080;
 const jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser')
 
 require('dotenv').config();
 
@@ -22,7 +23,14 @@ spotInit.initSpotify();
 twilInit.initTwilio();
 dbInit.initDb();
 
-app.use(cors());
+app.use(cookieParser())
+app.use(cors(
+    {
+        origin: 'http://localhost:3000',
+        optionsSuccessStatus: 200, 
+        credentials: true
+    }
+));
 app.get('/', (req, res) => {
     res.send('Hello World!');
     console.log("HIT");
