@@ -1,7 +1,6 @@
 require('dotenv');
 const express = require("express");
 const { promisify } = require('util');
-const getSpotify = require('../shared/_spotify').getSpotify;
 const { default: axios } = require('axios');
 const jwt  = require('jsonwebtoken');
 const User = require("../models/User.js");
@@ -34,10 +33,10 @@ router.post('/signUp', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    console.log('site login hit');
     console.log(req.body.username);
     let username = req.body.username;
     let password = req.body.password;
+    console.log(`${username} is attempting login...`)
     User.findOne({email: `${username}`}).exec(async (err, user) => {
         if (user ==  null || user == undefined) {
             res.status(404).send("User not found with specified username");
@@ -46,8 +45,7 @@ router.post('/login', async (req, res) => {
                 let d = new Date();
                 d.setDate(d.getDate() + 30);
                 user.password = "";
-                const accessToken = jwt.sign({user},
-                    process.env.JWT_ACCESS_SECRET);
+                const accessToken = jwt.sign({user}, process.env.JWT_ACCESS_SECRET);
                 res.cookie('jwt', accessToken, {
                     expires: d, 
                     httpOnly: true,

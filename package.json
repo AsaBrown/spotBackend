@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mocha": "^9.0.2",
     "mongoose": "^5.9.19",
+    "plaid": "^9.3.0",
     "promisify": "0.0.3",
     "spotify-web-api-node": "^4.0.0",
     "twilio": "^3.47.0",

@@ -13,6 +13,8 @@ const spotifyAuthRouter = require('./routes/spotifyAuth');
 const spotifyRouter = require('./routes/querySpotify');
 const twilioRouter = require('./routes/twilio');
 const authRouter = require('./routes/auth');
+const plaidRouter = require('./routes/plaid');
+const tellerRouter = require('./routes/teller');
 
 const spotInit = require("./shared/_spotify");
 const twilInit = require("./shared/_twilio");
@@ -54,8 +56,10 @@ function authenticateToken(req, res, next) {
 }
 
 app.use('/querySpotify', spotifyRouter);
-app.use('/auth', spotifyAuthRouter);
-app.use('/authentication', authRouter);
+app.use('/auth/spotify', spotifyAuthRouter);
+app.use('/auth/site', authRouter);
+app.use('/plaid', plaidRouter);
+app.use('/teller', tellerRouter);
 
 
 
